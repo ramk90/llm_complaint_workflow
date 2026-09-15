@@ -1,6 +1,5 @@
 # Environment & Local Configuration
 .env
-.env.local
 
 # Python runtime & caches
 __pycache__/
