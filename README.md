@@ -95,6 +95,9 @@ python main.py --verbose
 
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+
+curl http://localhost:8080/health
+curl -X POST http://localhost:8080/trigger-batch
 ```
 
 Available FastAPI endpoints include:
