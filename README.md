@@ -107,7 +107,7 @@ curl -X 'POST' \
   "workers": 4,
   "model": "llama3.1:8b"
 }'
-http://localhost:8000/docs#/default/process_file_upload_process_file_post
+http://localhost:8000/docs#/
 ```
 
 Available FastAPI endpoints include:
