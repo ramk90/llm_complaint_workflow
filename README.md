@@ -32,8 +32,7 @@ This project processes customer complaint documents using a Python workflow powe
 │   ├── config.py             # Config and directory setup
 │   ├── ingest.py             # File parsing / text extraction
 │   ├── orchestrator.py       # Workflow orchestration
-│   └── schemas.py            # Pydantic models and result objects
-├── tests/                    # Regression tests
+│   └── schemas.py            # Pydantic models and result objects             
 ├── .env                      # Local environment variables
 ├── .env.local                # Optional local overrides
 └── .gitignore
