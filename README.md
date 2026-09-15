@@ -96,8 +96,18 @@ python main.py --verbose
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 
-curl http://localhost:8080/health
-curl -X POST http://localhost:8080/trigger-batch
+curl http://localhost:8000/health
+curl -X 'POST' \
+  'http://localhost:8000/trigger' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "data_dir": "data/data",
+  "output_dir": "output",
+  "workers": 4,
+  "model": "llama3.1:8b"
+}'
+http://localhost:8000/docs#/default/process_file_upload_process_file_post
 ```
 
 Available FastAPI endpoints include:
