@@ -34,7 +34,6 @@ This project processes customer complaint documents using a Python workflow powe
 │   ├── orchestrator.py       # Workflow orchestration
 │   └── schemas.py            # Pydantic models and result objects             
 ├── .env                      # Local environment variables
-├── .env.local                # Optional local overrides
 └── .gitignore
 ```
 
