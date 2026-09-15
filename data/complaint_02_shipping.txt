@@ -1,0 +1,10 @@
+Customer: James Whitfield
+Email: j.whitfield@samplemail.com
+
+My order #ORD-77129 was supposed to arrive on February 20th, 2026 but the
+tracking page hasn't updated in 9 days and still shows "label created".
+I needed this item for a birthday gift and it is now late. I would like an
+update on where my package is, and if it cannot arrive within 3 days I
+would like a full refund instead of a replacement.
+
+This is frustrating because I paid for expedited shipping.

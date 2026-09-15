@@ -1,0 +1,27 @@
+# Environment & Local Configuration
+.env
+.env.local
+
+# Python runtime & caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Output artifacts
+output/
+!output/.gitkeep
+tests/
+
+# IDE and OS settings
+.DS_Store
+.idea/
+.vscode/
+
+# Pytest / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
