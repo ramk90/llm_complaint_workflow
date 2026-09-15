@@ -18,7 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source code and application files
 COPY src/ ./src/
-COPY app.py main.py generate_samples.py ./
 COPY data/ ./data/
 
 # Create output directories
