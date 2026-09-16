@@ -147,13 +147,7 @@ After processing, the project creates these outputs under the configured output 
 6. Generate an internal executive summary
 7. Save the per-case files and update the consolidated CSV report
 
-## Operational notes
-
-1. Batch processing uses a thread pool and writes the final CSV in deterministic order
-2. Missing output directories are created automatically
-3. Unsupported file types return a clear validation error
-
-## Notes
+## Operational Notes
 
 - Batch processing uses a thread pool and preserves deterministic ordering when writing the final CSV report.
 - If a requested output directory does not exist, the project creates it automatically.
