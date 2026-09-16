@@ -12,6 +12,10 @@ This project processes customer complaint documents using a Python workflow powe
 - Writes JSON, email text, summary text, and a consolidated CSV report
 - Supports single-file and batch processing modes
 
+## Workflow
+
+<img width="391" height="568" alt="image" src="https://github.com/user-attachments/assets/45f51681-e416-417b-85a5-91d0303fdb3c" />
+
 ## Project structure
 
 ```text
@@ -92,10 +96,17 @@ python main.py --verbose
 
 ## Run the API service
 
+Start the development server:
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8000 --reload
-
+```
+Check that the service is available:
+```bash
 curl http://localhost:8000/health
+```
+
+Trigger batch processing:
+```bash
 curl -X 'POST' \
   'http://localhost:8000/trigger' \
   -H 'accept: application/json' \
@@ -106,8 +117,9 @@ curl -X 'POST' \
   "workers": 4,
   "model": "llama3.1:8b"
 }'
-http://localhost:8000/docs#/
 ```
+
+Interactive API documentation is available at http://localhost:8000/docs#/
 
 Available FastAPI endpoints include:
 
