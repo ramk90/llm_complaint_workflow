@@ -1,4 +1,4 @@
-# AI Customer Complaint Workflow
+# AI Customer Complaint & Case Processing Workflow 
 
 This project processes customer complaint documents using a Python workflow powered by Google Gemini. It ingests complaint files, extracts structured facts, generates a customer-facing response email, produces an internal executive summary, and saves all outputs into organized folders.
 
