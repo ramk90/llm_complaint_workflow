@@ -128,7 +128,7 @@ Available FastAPI endpoints include:
 - `POST /trigger` - batch processing trigger
 - `POST /process-file` - upload a single file for processing
 
-## Outputs generated
+## Generated outputs
 
 After processing, the project creates these outputs under the configured output directory:
 
@@ -137,7 +137,7 @@ After processing, the project creates these outputs under the configured output 
 - `customer_emails/` - generated customer email drafts
 - `case_summaries/` - executive summaries for operations teams
 
-## Example of a processing flow
+## Processing sequence
 
 1. Load complaint file text
 2. Detect file type and extract text
@@ -145,7 +145,13 @@ After processing, the project creates these outputs under the configured output 
 4. Parse a validated `ComplaintAnalysis`
 5. Generate a response email
 6. Generate an internal executive summary
-7. Save outputs and write CSV report
+7. Save the per-case files and update the consolidated CSV report
+
+## Operational notes
+
+1. Batch processing uses a thread pool and writes the final CSV in deterministic order
+2. Missing output directories are created automatically
+3. Unsupported file types return a clear validation error
 
 ## Notes
 
