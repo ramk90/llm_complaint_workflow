@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code and application files
 COPY src/ ./src/
 COPY data/ ./data/
+COPY app.py main.py ./
 
 # Create output directories
 RUN mkdir -p output/structured_data output/customer_emails output/case_summaries

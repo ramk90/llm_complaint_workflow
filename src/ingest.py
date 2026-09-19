@@ -80,7 +80,7 @@ def extract_text_from_file(file_path: Union[str, Path]) -> str:
         return extract_text_from_txt(path)
     elif suffix == ".pdf":
         return extract_text_from_pdf(path)
-    elif suffix in (".docx", ".doc"):
+    elif suffix == ".docx":
         return extract_text_from_docx(path)
     else:
         raise ValueError(f"Unsupported file format '{suffix}' for file {path.name}. Supported formats: .txt, .pdf, .docx")

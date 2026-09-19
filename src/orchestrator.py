@@ -147,7 +147,7 @@ def process_batch(
     out_path = Path(output_dir)
     ensure_directories(out_path)
 
-    supported_extensions = {".txt", ".pdf", ".docx", ".doc"}
+    supported_extensions = {".txt", ".pdf", ".docx"}
     files_to_process = [
         p for p in in_path.glob("*") if p.is_file() and p.suffix.lower() in supported_extensions
     ]

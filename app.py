@@ -81,7 +81,7 @@ async def process_file_upload(file: UploadFile = File(...), model: Optional[str]
     Returns the complete structured analysis, customer response email, and executive summary.
     """
     suffix = Path(file.filename).suffix.lower()
-    if suffix not in (".txt", ".pdf", ".docx", ".doc"):
+    if suffix not in (".txt", ".pdf", ".docx"):
         raise HTTPException(
             status_code=400,
             detail=f"Unsupported file extension '{suffix}'. Supported: .txt, .pdf, .docx",
