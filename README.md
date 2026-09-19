@@ -70,8 +70,10 @@ DEFAULT_MODEL=gemini-3.6-flash
 DATA_DIR=./data
 OUTPUT_DIR=./output
 MAX_WORKERS=4
+# Capped at 2 to avoid exceeding the rate limit of 60 requests per minute for the Gemini API
 MAX_LLM_CONCURRENCY=2
-GENAI_TIMEOUT_MS=60000
+# Timeout to prevent long-running requests from blocking the workflow
+GENAI_TIMEOUT_MS=60000 
 ```
 
 > The project loads environment variables from `.env` automatically through `python-dotenv`.
