@@ -2,7 +2,8 @@ import logging
 from typing import Optional
 from google import genai
 from google.genai import types
-from tenacity import retry, stop_after_attempt, wait_exponential
+from google.genai.errors import APIError
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from src.config import GEMINI_API_KEY, DEFAULT_MODEL
 from src.schemas import ComplaintAnalysis, CustomerEmailOutput, ExecutiveSummaryOutput
@@ -11,17 +12,16 @@ logger = logging.getLogger(__name__)
 
 
 def get_genai_client(api_key: Optional[str] = None) -> genai.Client:
-    """Initialize and return a Google GenAI client instance."""
     key = api_key or GEMINI_API_KEY
     if key:
         return genai.Client(api_key=key)
-    # Default initialization (looks for GEMINI_API_KEY in environment)
     return genai.Client()
 
 
 @retry(
-    stop=stop_after_attempt(5),
-    wait=wait_exponential(multiplier=3, min=5, max=60),
+    retry=retry_if_exception_type(APIError),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=2, min=2, max=30),
     reraise=True,
 )
 def generate_content_with_retry(
