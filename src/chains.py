@@ -3,23 +3,32 @@ from typing import Optional
 from google import genai
 from google.genai import types
 from google.genai.errors import APIError
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
-from src.config import GEMINI_API_KEY, DEFAULT_MODEL
+from src.config import DEFAULT_MODEL, GEMINI_API_KEY, GENAI_TIMEOUT_MS
 from src.schemas import ComplaintAnalysis, CustomerEmailOutput, ExecutiveSummaryOutput
 
 logger = logging.getLogger(__name__)
+TRANSIENT_API_STATUS_CODES = frozenset({408, 425, 429, 500, 502, 503, 504})
+
+
+def is_retryable_error(error: BaseException) -> bool:
+    """Retry only transient API failures and client-side timeouts."""
+    if isinstance(error, APIError):
+        return error.code in TRANSIENT_API_STATUS_CODES
+    return isinstance(error, TimeoutError)
 
 
 def get_genai_client(api_key: Optional[str] = None) -> genai.Client:
     key = api_key or GEMINI_API_KEY
+    http_options = types.HttpOptions(timeout=GENAI_TIMEOUT_MS)
     if key:
-        return genai.Client(api_key=key)
-    return genai.Client()
+        return genai.Client(api_key=key, http_options=http_options)
+    return genai.Client(http_options=http_options)
 
 
 @retry(
-    retry=retry_if_exception_type(APIError),
+    retry=retry_if_exception(is_retryable_error),
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=2, min=2, max=30),
     reraise=True,

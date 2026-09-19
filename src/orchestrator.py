@@ -17,6 +17,7 @@ from src.config import (
     DATA_DIR,
     DEFAULT_MODEL,
     FINAL_REPORT_PATH,
+    MAX_LLM_CONCURRENCY,
     MAX_WORKERS,
     OUTPUT_DIR,
     STRUCTURED_DATA_DIR,
@@ -156,12 +157,22 @@ def process_batch(
         logger.warning(f"No valid documents (.txt, .pdf, .docx) found in {in_path.resolve()}")
         return []
 
-    logger.info(f"Starting batch processing of {len(files_to_process)} document(s) with max_workers={max_workers}")
+    if max_workers < 1:
+        raise ValueError("max_workers must be at least 1")
+    effective_workers = min(max_workers, MAX_LLM_CONCURRENCY)
+    logger.info(
+        "Starting batch processing of %d document(s) with max_workers=%d "
+        "(requested=%d, quota_limit=%d)",
+        len(files_to_process),
+        effective_workers,
+        max_workers,
+        MAX_LLM_CONCURRENCY,
+    )
 
     results: List[WorkflowResult] = []
 
     # Execute in thread pool for parallel batch execution
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+    with ThreadPoolExecutor(max_workers=effective_workers) as executor:
         future_to_file = {
             executor.submit(process_single_file, file_p, model_name, out_path): file_p
             for file_p in files_to_process

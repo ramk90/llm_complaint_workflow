@@ -19,9 +19,11 @@ FINAL_REPORT_PATH = OUTPUT_DIR / "final_report.csv"
 # LLM Configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "gemini-3.6-flash")
+GENAI_TIMEOUT_MS = int(os.getenv("GENAI_TIMEOUT_MS", "60000"))
 
 # Concurrency
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "4"))
+MAX_LLM_CONCURRENCY = int(os.getenv("MAX_LLM_CONCURRENCY", "2"))
 
 
 def ensure_directories(base_dir: Path | str | None = None):

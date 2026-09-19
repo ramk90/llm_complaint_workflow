@@ -70,6 +70,8 @@ DEFAULT_MODEL=gemini-3.6-flash
 DATA_DIR=./data
 OUTPUT_DIR=./output
 MAX_WORKERS=4
+MAX_LLM_CONCURRENCY=2
+GENAI_TIMEOUT_MS=60000
 ```
 
 > The project loads environment variables from `.env` automatically through `python-dotenv`.
